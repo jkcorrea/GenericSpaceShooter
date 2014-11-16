@@ -9,28 +9,27 @@ public abstract class IShip : MonoBehaviour {
 	Vector3 initialPosition;
 	Vector3 initialVelocity;
 	Vector3 initialAcceleration;
-	Vector3 velocity;
 	Vector3 acceleration;
 
 	void Start() {
 		transform.position = initialPosition;
-		velocity = initialVelocity;
+		rigidbody.velocity = initialVelocity;
 		acceleration = initialAcceleration;
 	}
 
 	void Update() {
-		velocity += acceleration*Time.deltaTime;
-		transform.position += new Vector3(velocity.x, velocity.y, 0f)*Time.deltaTime;
-		acceleration = Vector3.zero;
+		rigidbody.AddForce(acceleration,ForceMode.Acceleration);
+		Debug.Log ("Velocity: " + rigidbody.velocity + "; " + rigidbody.velocity.magnitude);
+		Debug.Log ("Acceleration: " + acceleration + "; " + acceleration.magnitude);
 	}
 
 
 	public void SetInitialPosition(Vector3 initialPosition) {this.initialPosition = initialPosition;}
 	public void SetInitialVelocity(Vector3 initialVelocity) {this.initialVelocity = initialVelocity;}
 	public void SetInitialAcceleration(Vector3 initialAcceleration) {this.initialAcceleration = initialAcceleration;}
-	public Vector3 GetVelocity(){return velocity;}
 	public void Accelerate(Vector3 targetAcceleration) {acceleration = targetAcceleration;}
 	public bool Fire() {return false;}
+
 	//	public Weapon CycleWeapon();
 
 	//	override
