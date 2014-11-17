@@ -20,19 +20,19 @@ public class AIControllerCircle : MonoBehaviour {
 
 	void Awake() {
 		ship = GetComponent<IShip>();
-		ship.SetInitialPosition(new Vector3(-Radius,0f,0f));
 		ship.SetInitialVelocity(new Vector3(0f,Velocity,0f));
 		ship.SetInitialAcceleration(new Vector3(Velocity*Velocity/Radius, 0f, 0f));
 	}
 
 	void Update() {
 		ship.Accelerate(getAcceleration());
+//		ship.Fire ();
 	}
 
 	Vector3 getAcceleration() {
 		float magnitude = Velocity*Velocity/Radius;
-		Vector3 direction = -transform.position.normalized;
-		Debug.Log (magnitude*direction);
+		Vector3 direction = new Vector3(-transform.position.x, -transform.position.y, 0f).normalized;
+//		Debug.Log (magnitude*direction);
 		return magnitude*direction;
 	}
 

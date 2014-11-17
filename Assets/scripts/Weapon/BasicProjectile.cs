@@ -16,6 +16,7 @@ public class BasicProjectile: MonoBehaviour{
 
 	void Start() {
 		enemy = GameObject.FindGameObjectWithTag("enemy");
+		destroyProjectile();
 	}
 
 	void OnCollisionEnter (Collision collision) {
@@ -25,20 +26,21 @@ public class BasicProjectile: MonoBehaviour{
 		}
 
 		// Apply damage to target object
-		enemy.collider.SendMessage("ApplyDamage", damage, SendMessageOptions.DontRequireReceiver);//"applyDamage" is the method enemy to call when projectile hit the enemy
+		collision.gameObject.SendMessage("ApplyDamage", damage, SendMessageOptions.DontRequireReceiver);//"applyDamage" is the method enemy to call when projectile hit the enemy
+		Destroy (gameObject);
 
 	}
 
-	void destoryProjectile(){
+	void destroyProjectile(){
 		if (gameObject.tag.Equals ("bullet")) {
 			Destroy (gameObject, 4f);
 			Debug.Log (gameObject.name);
 		}
 	}
 
-	void Update(){
-		destoryProjectile ();
-	}
+//	void Update(){
+//		destoryProjectile ();
+//	}
 
 
 }

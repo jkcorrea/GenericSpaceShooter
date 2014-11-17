@@ -3,32 +3,51 @@ using System.Collections;
 
 public abstract class IShip : MonoBehaviour {
 	
-	public Rect Bounds;
+	public Rect bounds;
+	public float initialHealth;
+	public IWeapon weapon;
 	
 	int currentWeaponIndex;
-	Vector3 initialPosition;
 	Vector3 initialVelocity;
 	Vector3 initialAcceleration;
 	Vector3 acceleration;
+	float health;
+	bool isDead;
 
 	void Start() {
-		transform.position = initialPosition;
 		rigidbody.velocity = initialVelocity;
 		acceleration = initialAcceleration;
+		health = initialHealth;
+		isDead = health > 0f;
 	}
 
-	void Update() {
+	void FixedUpdate() {
 		rigidbody.AddForce(acceleration,ForceMode.Acceleration);
-		Debug.Log ("Velocity: " + rigidbody.velocity + "; " + rigidbody.velocity.magnitude);
-		Debug.Log ("Acceleration: " + acceleration + "; " + acceleration.magnitude);
+//		Debug.Log ("Velocity: " + rigidbody.velocity + "; " + rigidbody.velocity.magnitude);
+//		Debug.Log ("Acceleration: " + acceleration + "; " + acceleration.magnitude);
 	}
 
 
-	public void SetInitialPosition(Vector3 initialPosition) {this.initialPosition = initialPosition;}
 	public void SetInitialVelocity(Vector3 initialVelocity) {this.initialVelocity = initialVelocity;}
 	public void SetInitialAcceleration(Vector3 initialAcceleration) {this.initialAcceleration = initialAcceleration;}
 	public void Accelerate(Vector3 targetAcceleration) {acceleration = targetAcceleration;}
-	public bool Fire() {return false;}
+
+	public bool Fire() {
+		return weapon.Fire();
+	}
+
+	public void ApplyDamage(float damage) {
+		health -= damage;
+		if (health <= 0f) {
+			Die();
+		}
+	}
+
+	void Die() {
+		isDead = true;
+		Debug.Log ("Died...");
+		Destroy (gameObject);
+	}
 
 	//	public Weapon CycleWeapon();
 
