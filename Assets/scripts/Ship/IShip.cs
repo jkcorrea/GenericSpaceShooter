@@ -15,7 +15,9 @@ public abstract class IShip : MonoBehaviour {
 	bool isDead;
 
 	void Start() {
-		rigidbody.velocity = initialVelocity;
+		Debug.Log ("Ship Start");
+		Debug.Log (initialVelocity);
+		rigidbody.AddForce(initialVelocity, ForceMode.VelocityChange);
 		acceleration = initialAcceleration;
 		health = initialHealth;
 		isDead = health > 0f;
