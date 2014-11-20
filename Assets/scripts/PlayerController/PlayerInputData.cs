@@ -1,7 +1,6 @@
 ﻿public struct PlayerInputData
 {
-    public float up;
-    public float down;
-    public float left;
-    public float right;
+    public float x;
+    public float y;
+    public bool isFiring;
 }
