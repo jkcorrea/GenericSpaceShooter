@@ -6,7 +6,6 @@ public abstract class IShip : MonoBehaviour {
 	public Rect bounds;
 	public float initialHealth;
 	public IWeapon weapon;
-	public Transform explosionPrelab;
 	
 	int currentWeaponIndex;
 	Vector3 initialVelocity;
@@ -26,7 +25,6 @@ public abstract class IShip : MonoBehaviour {
 
 	void FixedUpdate() {
 		rigidbody.AddForce(acceleration,ForceMode.Acceleration);
-//		Die ();
 //		Debug.Log ("Velocity: " + rigidbody.velocity + "; " + rigidbody.velocity.magnitude);
 //		Debug.Log ("Acceleration: " + acceleration + "; " + acceleration.magnitude);
 	}
@@ -49,8 +47,6 @@ public abstract class IShip : MonoBehaviour {
 
 	void Die() {
 		isDead = true;
-
-		Instantiate (explosionPrelab, transform.position, transform.rotation);
 		Debug.Log ("Died...");
 		Destroy (gameObject);
 	}
