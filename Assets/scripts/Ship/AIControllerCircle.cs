@@ -14,13 +14,13 @@ using UnityEngine;
 public class AIControllerCircle : AIController {
 
 	public float Radius = 3f;
-	public float Velocity = 10f;
+	public float Velocity = 4f;
 
 	IShip ship;
 	Vector2 center;
 
 	void Start() {
-		Debug.Log ("Controller Start");
+//		Debug.Log ("Controller Start");
 		center = new Vector2(transform.position.x, transform.position.y);
 		transform.position = new Vector3(transform.position.x - Radius, transform.position.y, transform.position.z);
 		ship = GetComponent<IShip>();
@@ -36,7 +36,7 @@ public class AIControllerCircle : AIController {
 	Vector3 getAcceleration() {
 		float magnitude = Velocity*Velocity/Radius;
 		Vector3 direction = new Vector3(center.x - transform.position.x, center.y - transform.position.y, 0f).normalized;
-		Debug.Log (direction);
+//		Debug.Log (direction);
 //		Debug.Log (magnitude*direction);
 		return magnitude*direction;
 	}

@@ -7,6 +7,7 @@ public abstract class IShip : MonoBehaviour {
 	public float initialHealth;
 	public IWeapon weapon;
 	public Transform explosionPrelab;
+	public float score;
 	
 	int currentWeaponIndex;
 	Vector3 initialVelocity;
@@ -49,7 +50,7 @@ public abstract class IShip : MonoBehaviour {
 
 	void Die() {
 		isDead = true;
-
+		GameObject.FindObjectOfType<ScoreTracker>().IncrementScore(score);
 		Instantiate (explosionPrelab, transform.position, transform.rotation);
 		Debug.Log ("Died...");
 		Destroy (gameObject);

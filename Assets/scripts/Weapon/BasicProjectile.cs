@@ -34,7 +34,7 @@ public class BasicProjectile: MonoBehaviour{
 	void destroyProjectile(){
 		if (gameObject.tag.Equals ("bullet")) {
 			Destroy (gameObject, 4f);
-			Debug.Log (gameObject.name);
+//			Debug.Log (gameObject.name);
 		}
 	}
 
