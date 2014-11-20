@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public abstract class IShip : MonoBehaviour {
 	
@@ -16,9 +17,15 @@ public abstract class IShip : MonoBehaviour {
 	float health;
 	bool isDead;
 
-	void Start() {
-		Debug.Log ("Ship Start");
-		Debug.Log (initialVelocity);
+	List<DeathListener> deathListeners;
+
+	void Awake() {
+		deathListeners = new List<DeathListener>();
+	}
+
+	public virtual void Start() {
+//		Debug.Log ("Ship Start");
+//		Debug.Log (initialVelocity);
 		rigidbody.AddForce(initialVelocity, ForceMode.VelocityChange);
 		acceleration = initialAcceleration;
 		health = initialHealth;
@@ -48,12 +55,22 @@ public abstract class IShip : MonoBehaviour {
 		}
 	}
 
+	public void RegisterDeathListener(DeathListener listener) {
+		deathListeners.Add(listener);
+	}
+
 	void Die() {
 		isDead = true;
-		GameObject.FindObjectOfType<ScoreTracker>().IncrementScore(score);
 		Instantiate (explosionPrelab, transform.position, transform.rotation);
+		notifyDeathListeners();
 		Debug.Log ("Died...");
 		Destroy (gameObject);
+	}
+
+	void notifyDeathListeners() {
+		foreach (DeathListener listener in deathListeners) {
+			listener.NotifyDeath(this);
+		}
 	}
 
 	//	public Weapon CycleWeapon();

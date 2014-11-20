@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ScoreTracker : MonoBehaviour {
+public class ScoreTracker : MonoBehaviour, DeathListener {
 
 	float score;
 	GUIText guiText;
@@ -18,7 +18,11 @@ public class ScoreTracker : MonoBehaviour {
 		guiText.text = "" + score;
 	}
 
-	public void IncrementScore(float value) {
+	public void NotifyDeath(IShip deadShip) {
+		incrementScore (deadShip.score);
+	}
+
+	void incrementScore(float value) {
 		score += value;
 	}
 

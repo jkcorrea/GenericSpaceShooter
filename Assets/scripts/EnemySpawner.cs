@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class EnemySpawner : MonoBehaviour {
+public class EnemySpawner : MonoBehaviour, DeathListener {
 
 	public GameObject baseEnemy;
 	public float period;
@@ -29,10 +29,20 @@ public class EnemySpawner : MonoBehaviour {
 		AIController[] enemyTypes = GetComponentsInChildren<AIController>();
 		int index = Mathf.FloorToInt(Random.value*enemyTypes.Length);
 		GameObject enemy = GameObject.Instantiate(baseEnemy, transform.position, transform.rotation) as GameObject;
+		IShip enemyShip = enemy.GetComponent<IShip>();
+		registerDeathListeners (enemyShip);
 		AIController enemyType = enemyTypes[index];
-		Debug.Log(enemy);
 		enemy.AddComponent(enemyType.GetType());
 		enemy.rigidbody.AddForce(transform.forward*speed, ForceMode.VelocityChange);
+	}
+
+	void registerDeathListeners(IShip enemyShip) {
+		enemyShip.RegisterDeathListener(this);
+		enemyShip.RegisterDeathListener(GameObject.FindObjectOfType<ScoreTracker>());
+	}
+
+	public void NotifyDeath(IShip deadShip) {
+		timer = 0f;
 	}
 
 }
