@@ -13,7 +13,7 @@ namespace Assets
             PlayerInputData pid = new PlayerInputData();
             pid.x = Input.GetAxis("Horizontal");
             pid.y = Input.GetAxis("Vertical");
-            pid.isFiring = Input.GetButton("Fire1");
+            pid.isFiring = Input.GetButton("Fire1") || Input.GetKeyDown(KeyCode.Space);
             return pid;
         }
     }

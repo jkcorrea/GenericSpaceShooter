@@ -19,7 +19,7 @@ public class EnemySpawner : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		timer -= Time.deltaTime;
-		if (timer <= 0f) {
+		if (timer <= 0f && Random.value >= 0.67f) {
 			spawnEnemy();
 			timer = period;
 		}
