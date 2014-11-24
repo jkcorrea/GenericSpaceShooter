@@ -23,6 +23,7 @@ public class BulletWeapon : IWeapon {
 	void Start() {
 		cooldownRemaining = 0f;
 		canFire = true;
+		projectile = (Instantiate(Resources.Load("bullet2")) as GameObject).transform;
 	}
 
 	void Update() {
@@ -34,11 +35,14 @@ public class BulletWeapon : IWeapon {
 
 	override
 	public bool Fire() {
+		if (projectile == null) {
+			projectile = (Instantiate(Resources.Load("bullet2")) as GameObject).transform;
+		}
 		if (canFire) {
 			canFire = false;
 			cooldownRemaining = cooldown;
 			Transform bullet = GameObject.Instantiate(projectile, shootPosition.position, shootPosition.rotation) as Transform;
-			bullet.rigidbody.velocity = shootPosition.forward*speed;
+			bullet.rigidbody.velocity = shootPosition.forward * speed;
 			audio.Play ();
 			return true;
 		}
