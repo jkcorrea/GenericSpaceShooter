@@ -30,6 +30,7 @@ public abstract class IShip : MonoBehaviour {
 		acceleration = initialAcceleration;
 		health = initialHealth;
 		isDead = health > 0f;
+		weapon = gameObject.AddComponent ("LaserWeapon") as LaserWeapon;
 	}
 
 	void FixedUpdate() {

@@ -18,14 +18,17 @@ public class LaserWeapon : IWeapon {
 	//The particle system, in this case sparks which will be created by the Laser
 	public ParticleSystem endEffect;
 	Vector3 offset;
+	Material LaserMaterialRef;
 	
 	
 	// Use this for initialization
 	void Start () {
-		lineRenderer = GetComponent<LineRenderer>();
-		myTransform = transform;
+		lineRenderer = gameObject.AddComponent("LineRenderer") as LineRenderer;
 		lineRenderer.SetWidth(laserWidth, laserWidth);
 		lineRenderer.SetVertexCount((int)maxLength);
+		LaserMaterialRef = (Material)Resources.LoadAssetAtPath("Assets/Materials/laser2.mat", typeof(Material));
+		lineRenderer.material = LaserMaterialRef;
+		lineRenderer.material.mainTextureOffset = new Vector2 (0, Time.time);
 	}
 	
 	// Update is called once per frame
@@ -35,20 +38,22 @@ public class LaserWeapon : IWeapon {
 
 	override
 	public bool Fire() {
-
-		CheckCollsion();
 		int i = 0;
+		length = (int)maxLength;
+		position = new Vector3[length];
+		lineRenderer.SetVertexCount(length);
 		while (i < length) {
-			Vector3 pos = new Vector3(myTransform.position.x, myTransform.position.y , i * 0.5F);
+			Vector3 pos = new Vector3(transform.position.x, transform.position.y , i * 0.5F);
 			lineRenderer.SetPosition(i, pos);
 			i++;
 		}
+		CheckCollsion();
 		return true;
 	}
 
 	void CheckCollsion(){
 		RaycastHit[] hit;
-		hit = Physics.RaycastAll(myTransform.position, myTransform.forward, maxLength);
+		hit = Physics.RaycastAll(transform.position, transform.forward, maxLength);
 		int i = 0;
 		while(i < hit.Length){
 			//Check to make sure we aren't hitting triggers but colliders
@@ -57,15 +62,18 @@ public class LaserWeapon : IWeapon {
 				length = (int)Mathf.Round(hit[i].distance)+2;
 				position = new Vector3[length];
 				lineRenderer.SetVertexCount(length);
-
+				//notify enemy die
 				return;
 			}
 			i++;
 		}
 
-		length = (int)maxLength;
-		position = new Vector3[length];
-		lineRenderer.SetVertexCount(length);
+		//no collision,destory the laser
+//		length = (int)maxLength;
+//		position = new Vector3[length];
+//		lineRenderer.SetVertexCount(length);
+
+		lineRenderer.SetPosition (0, transform.position);
 	}
 	
 	
