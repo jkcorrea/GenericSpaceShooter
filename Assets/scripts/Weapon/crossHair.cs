@@ -3,20 +3,24 @@ using System.Collections;
 
 public class crossHair : MonoBehaviour {
 
+	public float maxLength = 50.0f;
+
 	bool drawCrosshair = true;
 	Color crosshairColor = Color.white;
 
-	float width = 3.0f;      //Crosshair width
-	float height = 35.0f;     //Crosshair height
+	float width = 2.0f;      //Crosshair width
+	float height = 15.0f;     //Crosshair height
 	// Use this for initialization
 	
     Texture2D tex;
 	
 	GUIStyle lineStyle;
 
-	public Vector2 crossHairLoc;
+	public Vector3 crossHairLoc;
 
 	Camera mainCam;
+
+	public bool shooting;
 
 	public class spreading{
 		public float spread = 20.0f;          //Adjust this for a bigger or smaller crosshair
@@ -59,12 +63,11 @@ public class crossHair : MonoBehaviour {
  	}
 
 	void OnGUI(){
-		Vector2 centerPoint = new Vector2(Screen.width / 2, Screen.height / 2);
-//		Vector3 screenPos = mainCam.WorldToScreenPoint(transform.position);
-//		Vector2 centerPoint = new Vector2 (screenPos.x, screenPos.y);
-		//Vector2 centerPoint = new Vector2(crossHairLoc.x, crossHairLoc.y);
+
+		Vector3 posit = new Vector3 (transform.position.x, transform.position.y, maxLength * 0.5F);
+		Vector3 screenPosi = mainCam.WorldToScreenPoint (posit);
+		Vector2 centerPoint = new Vector2(screenPosi.x, Screen.height - screenPosi.y);
 		
-		//if(drawCrosshair && crossHairLoc != Vector2.zero){
 		if(drawCrosshair){
 
 			GUI.Box(new Rect(centerPoint.x - width / 2, centerPoint.y - (height + spread.spread), width, height), "", lineStyle);

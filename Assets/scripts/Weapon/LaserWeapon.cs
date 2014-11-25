@@ -22,10 +22,12 @@ public class LaserWeapon : IWeapon {
 	Material LaserMaterialRef;
 	bool isShowingLaser;
 	crossHair laserCrossHair;
+	bool isPlayerOrNot;
 	
 	
 	// Use this for initialization
 	void Start () {
+		isPlayerOrNot = false;
 		isShowingLaser = false;
 		lineRenderer = gameObject.AddComponent("LineRenderer") as LineRenderer;
 		lineRenderer.SetWidth(laserWidth, laserWidth);
@@ -36,7 +38,12 @@ public class LaserWeapon : IWeapon {
 		lineRenderer.enabled = false;
 
 		mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-		laserCrossHair = gameObject.GetComponent<crossHair> ();
+		if (gameObject.tag.Equals ("Player")) {
+			isPlayerOrNot = true;
+			laserCrossHair = gameObject.AddComponent<crossHair>();
+			laserCrossHair.shooting = false;
+		}
+
 	}
 	
 	// Update is called once per frame
@@ -85,6 +92,14 @@ public class LaserWeapon : IWeapon {
 	}
 
 	void generateLaser() {
+
+//		if (isPlayerOrNot) {
+//			laserCrossHair.shooting = true;
+//			Vector3 posit = new Vector3 (transform.position.x, transform.position.y, length * 0.5F);
+//			Vector3 screenPos = mainCam.WorldToScreenPoint (posit);
+//			laserCrossHair.crossHairLoc = screenPos;
+//		}
+
 		int i = 0;
 		length = (int)maxLength;
 		position = new Vector3[length];
@@ -94,12 +109,10 @@ public class LaserWeapon : IWeapon {
 			lineRenderer.SetPosition(i, pos);
 			i++;
 		}
-		Vector3 posit = new Vector3(transform.position.x, transform.position.y , i * 0.5F);
-		Vector3 screenPos = mainCam.WorldToScreenPoint(posit);
-		Debug.Log("laser End Position" + posit.x.ToString() + " " +  posit.y.ToString()+ " " + posit.z.ToString());
-		Debug.Log("laser End Position Screen" + screenPos.x.ToString() + " " +  screenPos.y.ToString()+ " " + screenPos.z.ToString());
-
-		//laserCrossHair.crossHairLoc = new Vector2 (screenPos.x, screenPos.y);
+	
+//		Debug.Log("laser End Position" + posit.x.ToString() + " " +  posit.y.ToString()+ " " + posit.z.ToString());
+//		Debug.Log("laser End Position Screen" + screenPos.x.ToString() + " " +  screenPos.y.ToString()+ " " + screenPos.z.ToString());
+//
 		CheckCollsion ();
 	}
 
