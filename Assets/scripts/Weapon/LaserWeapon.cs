@@ -9,7 +9,7 @@ public class LaserWeapon : IWeapon {
 	public Color color = Color.red;
 	public float damage = 50;
 
-	
+	Camera mainCam;
 	LineRenderer lineRenderer;
 	int length;
 	Vector3[] position;
@@ -21,6 +21,7 @@ public class LaserWeapon : IWeapon {
 	Vector3 offset;
 	Material LaserMaterialRef;
 	bool isShowingLaser;
+	crossHair laserCrossHair;
 	
 	
 	// Use this for initialization
@@ -33,6 +34,9 @@ public class LaserWeapon : IWeapon {
 		lineRenderer.material = LaserMaterialRef;
 		lineRenderer.material.mainTextureOffset = new Vector2 (0, Time.time);
 		lineRenderer.enabled = false;
+
+		mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+		laserCrossHair = gameObject.GetComponent<crossHair> ();
 	}
 	
 	// Update is called once per frame
@@ -90,6 +94,12 @@ public class LaserWeapon : IWeapon {
 			lineRenderer.SetPosition(i, pos);
 			i++;
 		}
+		Vector3 posit = new Vector3(transform.position.x, transform.position.y , i * 0.5F);
+		Vector3 screenPos = mainCam.WorldToScreenPoint(posit);
+		Debug.Log("laser End Position" + posit.x.ToString() + " " +  posit.y.ToString()+ " " + posit.z.ToString());
+		Debug.Log("laser End Position Screen" + screenPos.x.ToString() + " " +  screenPos.y.ToString()+ " " + screenPos.z.ToString());
+
+		//laserCrossHair.crossHairLoc = new Vector2 (screenPos.x, screenPos.y);
 		CheckCollsion ();
 	}
 
