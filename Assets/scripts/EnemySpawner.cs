@@ -2,9 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class EnemySpawner : MonoBehaviour, DeathListener {
-
+public class EnemySpawner : MonoBehaviour, DeathListener 
+{
 	public GameObject baseEnemy;
+    public GameObject GUIObject;
 	public float period;
 	public float speed;
 
@@ -38,7 +39,7 @@ public class EnemySpawner : MonoBehaviour, DeathListener {
 
 	void registerDeathListeners(IShip enemyShip) {
 		enemyShip.RegisterDeathListener(this);
-		enemyShip.RegisterDeathListener(GameObject.FindObjectOfType<ScoreTracker>());
+		enemyShip.RegisterDeathListener(GUIObject.GetComponent<Scoreboard>());
 	}
 
 	public void NotifyDeath(IShip deadShip) {
