@@ -75,6 +75,11 @@ public abstract class IShip : MonoBehaviour {
 		}
 	}
 
+    public float getHealth()
+    {
+        return health;
+    }
+
 	//	public Weapon CycleWeapon();
 
 	//	override
