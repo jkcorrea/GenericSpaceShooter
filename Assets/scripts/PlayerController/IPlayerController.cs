@@ -21,7 +21,7 @@ public abstract class IPlayerController : MonoBehaviour
     protected void controlPlayerCharacter()
     {
         PlayerInputData pid = getPlayerInputData();
-        ship.Accelerate(new Vector3(4*pid.x, 4*pid.y));
+        ship.Accelerate(new Vector3(ship.accelScalar * pid.x, ship.accelScalar *pid.y));
         if (pid.isFiring) ship.Fire();
         if (pid.isGettingHit) ship.ApplyDamage(1f);
     }

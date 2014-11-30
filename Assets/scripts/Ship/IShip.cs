@@ -9,6 +9,7 @@ public abstract class IShip : MonoBehaviour {
 	public IWeapon weapon;
 	public Transform explosionPrelab;
 	public float score;
+    public float accelScalar = 1f;
 	
 	int currentWeaponIndex;
 	Vector3 initialVelocity;
