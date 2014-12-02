@@ -10,10 +10,36 @@
 using System;
 using UnityEngine;
 
-public abstract class AIController : MonoBehaviour
-{
+public abstract class AIController : MonoBehaviour {
+
+	public float cooldown = 1f;
+	public float accuracy = 10f;
+
+	protected IShip ship;
+	protected Transform target;
+
+	float timer;
 
 
+	protected virtual void Start() {
+		ship = GetComponent<IShip>();
+		Debug.Log (ship);
+		target = GameObject.FindGameObjectWithTag("Player").transform;
+		Debug.Log(target);
+	}
+
+	protected virtual void Update() {
+		timer = Mathf.Max (0f, timer - Time.deltaTime);
+	}
+
+	protected bool Fire() {
+		if (timer == 0f) {
+			ship.Fire ();
+			timer = cooldown;
+			return true;
+		}
+		return false;
+	}
 
 }
 

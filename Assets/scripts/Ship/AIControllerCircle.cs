@@ -16,21 +16,23 @@ public class AIControllerCircle : AIController {
 	public float Radius = 3f;
 	public float Velocity = 4f;
 
-	IShip ship;
 	Vector2 center;
 
-	void Start() {
-//		Debug.Log ("Controller Start");
+	override
+	protected void Start() {
+		base.Start ();
 		center = new Vector2(transform.position.x, transform.position.y);
 		transform.position = new Vector3(transform.position.x - Radius, transform.position.y, transform.position.z);
-		ship = GetComponent<IShip>();
 		ship.rigidbody.AddForce(new Vector3(0f, Velocity, 0f), ForceMode.VelocityChange);
 		ship.SetInitialAcceleration(new Vector3(Velocity*Velocity/Radius, 0f, 0f));
 	}
 
-	void Update() {
+	override
+	protected void Update() {
+		base.Update();
 		ship.Accelerate(getAcceleration());
-//		ship.Fire ();
+		ship.weapon.Face(target, accuracy);
+		Fire ();
 	}
 
 	Vector3 getAcceleration() {

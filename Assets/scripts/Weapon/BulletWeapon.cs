@@ -14,7 +14,6 @@ public class BulletWeapon : IWeapon {
 
 	public Transform projectile;
 	public float cooldown;
-	public Transform shootPosition;
 	public float speed;
 
 	float cooldownRemaining;
@@ -39,7 +38,7 @@ public class BulletWeapon : IWeapon {
 			cooldownRemaining = cooldown;
 			Transform bullet = GameObject.Instantiate(projectile, shootPosition.position, shootPosition.rotation) as Transform;
 			bullet.rigidbody.velocity = shootPosition.forward * speed;
-			audio.Play ();
+//			audio.Play ();
 			return true;
 		}
 		return false;

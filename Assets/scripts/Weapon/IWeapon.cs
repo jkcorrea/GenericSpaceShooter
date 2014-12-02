@@ -12,7 +12,16 @@ using UnityEngine;
 
 public abstract class IWeapon : MonoBehaviour {
 
+	public Transform shootPosition;
+
 	public abstract bool Fire();
+
+	public void Face(Transform target, float accuracy) {
+		Debug.Log (target);
+		Debug.Log (shootPosition);
+		Quaternion newRotation = Quaternion.LookRotation (target.position-shootPosition.position);
+		shootPosition.transform.rotation = Quaternion.Lerp (transform.rotation, newRotation, accuracy);
+	}
 
 }
 
