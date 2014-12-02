@@ -40,11 +40,6 @@ public class BulletWeapon : IWeapon {
 			Debug.Log (shootPosition);
 			Transform bullet = GameObject.Instantiate(projectile, shootPosition.position, shootPosition.rotation) as Transform;
 			bullet.rigidbody.velocity = shootPosition.forward * speed;
-<<<<<<< HEAD
-//			audio.Play ();
-=======
-			//audio.Play ();
->>>>>>> origin/master
 			return true;
 		}
 		return false;

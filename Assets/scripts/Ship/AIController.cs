@@ -33,12 +33,7 @@ public abstract class AIController : MonoBehaviour {
 	}
 
 	protected bool Fire() {
-		if (timer == 0f) {
-			ship.Fire ();
-			timer = cooldown;
-			return true;
-		}
-		return false;
+		return ship.Fire ();
 	}
 
 }

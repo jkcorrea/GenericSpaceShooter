@@ -24,7 +24,7 @@ public class AIControllerZigzag : AIController {
 	protected void Update() {
 		base.Update ();
 		ship.Accelerate(getAcceleration());
-		ship.weapon.Face (target, accuracy);
+//		ship.weapon.Face (target, accuracy);
 		Fire ();
 	}
 
