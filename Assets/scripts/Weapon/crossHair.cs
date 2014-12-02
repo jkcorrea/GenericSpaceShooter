@@ -6,7 +6,7 @@ public class crossHair : MonoBehaviour {
 	public float maxLength = 50.0f;
 
 	bool drawCrosshair = true;
-	Color crosshairColor = Color.white;
+	Color crosshairColor = Color.green;
 
 	float width = 2.0f;      //Crosshair width
 	float height = 15.0f;     //Crosshair height
