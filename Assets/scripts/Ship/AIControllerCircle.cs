@@ -24,13 +24,16 @@ public class AIControllerCircle : AIController {
 		center = new Vector2(transform.position.x, transform.position.y);
 		transform.position = new Vector3(transform.position.x - Radius, transform.position.y, transform.position.z);
 		ship.rigidbody.AddForce(new Vector3(0f, Velocity, 0f), ForceMode.VelocityChange);
-		ship.SetInitialAcceleration(new Vector3(Velocity*Velocity/Radius, 0f, 0f));
+		ship.SetInitialAcceleration(Vector3.zero);
 	}
 
 	override
 	protected void Update() {
 		base.Update();
-		ship.Accelerate(getAcceleration());
+		Vector3 direction = new Vector3(-(center.y - transform.position.y), center.x - transform.position.x, 0f).normalized;
+		Debug.Log (direction);
+		ship.rigidbody.velocity = direction*Velocity + Vector3.forward*ship.rigidbody.velocity.z;
+//		ship.Accelerate(getAcceleration());
 		ship.weapon.Face(target, accuracy);
 		Fire ();
 	}
@@ -41,6 +44,12 @@ public class AIControllerCircle : AIController {
 //		Debug.Log (direction);
 //		Debug.Log (magnitude*direction);
 		return magnitude*direction;
+	}
+
+	override
+	protected void SetModifiers(int level) {
+		Velocity = 4f + 2*level;
+		accuracy = 10f + 5*level;
 	}
 
 }

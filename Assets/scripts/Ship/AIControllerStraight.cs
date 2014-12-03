@@ -22,5 +22,9 @@ public class AIControllerStraight : AIController {
 		Fire ();
 	}
 
+	override protected void SetModifiers(int level) {
+
+	}
+
 }
 

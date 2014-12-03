@@ -12,12 +12,13 @@ using UnityEngine;
 
 public class AIControllerZigzag : AIController {
 
-	public float amplitude = 3;
+	public float amplitude = 3f;
+	public float frequency = 5f;
 
 	override
 	protected void Start() {
 		base.Start ();
-		ship.rigidbody.AddForce(Vector3.right*amplitude, ForceMode.VelocityChange);
+		ship.rigidbody.AddForce(Vector3.right*frequency*Mathf.Sqrt(amplitude*amplitude), ForceMode.VelocityChange);
 	}
 
 	override
@@ -29,7 +30,11 @@ public class AIControllerZigzag : AIController {
 	}
 
 	Vector3 getAcceleration() {
-		return -transform.position.x*Vector3.right;
+		return -transform.position.x*Vector3.right*frequency*frequency;
+	}
+
+	override protected void SetModifiers(int level) {
+		frequency = 1 + 2*level;
 	}
 
 }

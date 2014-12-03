@@ -22,6 +22,10 @@ public abstract class AIController : MonoBehaviour {
 
 
 	protected virtual void Start() {
+		float score = GameObject.FindObjectOfType<Scoreboard>().GetScore ();
+		int level = 1 + Mathf.FloorToInt(score/20f);
+		accuracy = 2 + 2*level;
+		SetModifiers(level);
 		ship = GetComponent<IShip>();
 		Debug.Log (ship);
 		target = GameObject.FindGameObjectWithTag("Player").transform;
@@ -35,6 +39,8 @@ public abstract class AIController : MonoBehaviour {
 	protected bool Fire() {
 		return ship.Fire ();
 	}
+
+	abstract protected void SetModifiers(int level);
 
 }
 

@@ -31,4 +31,8 @@ public class Scoreboard : MonoBehaviour, DeathListener
     {
         score += value;
     }
+
+	public float GetScore() {
+		return score;
+	}
 }
