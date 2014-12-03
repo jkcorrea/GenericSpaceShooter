@@ -6,6 +6,7 @@ public class TouchPlayerController : IPlayerController
 {
     public override PlayerInputData getPlayerInputData()
     {
+#if UNITY_IPHONE || UNITY_ANDROID
         var x = Input.acceleration;
         PlayerInputData pid = new PlayerInputData();
         pid.x = Input.acceleration.x;
@@ -17,5 +18,6 @@ public class TouchPlayerController : IPlayerController
             }
         }
         return pid;
+#endif
     }
 }
