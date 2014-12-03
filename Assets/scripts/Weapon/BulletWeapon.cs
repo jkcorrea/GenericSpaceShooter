@@ -32,7 +32,7 @@ public class BulletWeapon : IWeapon {
 	}
 
 	override
-	public bool Fire() {
+	public GameObject Fire() {
 		if (canFire) {
 			canFire = false;
 			cooldownRemaining = cooldown;
@@ -40,9 +40,9 @@ public class BulletWeapon : IWeapon {
 			Debug.Log (shootPosition);
 			Transform bullet = GameObject.Instantiate(projectile, shootPosition.position, shootPosition.rotation) as Transform;
 			bullet.rigidbody.velocity = shootPosition.forward * speed;
-			return true;
+			return bullet.gameObject;
 		}
-		return false;
+		return null;
 	}
 
 }

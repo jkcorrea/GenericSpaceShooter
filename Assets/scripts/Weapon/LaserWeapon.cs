@@ -51,10 +51,10 @@ public class LaserWeapon : IWeapon {
 	}
 
 	override
-	public bool Fire() {
+	public GameObject Fire() {
 		StopCoroutine ("showLaser");
 		StartCoroutine ("showLaser");
-		return true;
+		return null;
 	}
 
 	void CheckCollsion(){

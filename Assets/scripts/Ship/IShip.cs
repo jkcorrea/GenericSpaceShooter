@@ -62,7 +62,12 @@ public abstract class IShip : MonoBehaviour {
 	public void Accelerate(Vector3 targetAcceleration) {acceleration = targetAcceleration;}
 
 	public bool Fire() {
-		return weapon.Fire();
+		GameObject projectile = weapon.Fire();
+		if (projectile == null) {
+			return false;
+		}
+		projectile.layer = LayerMask.NameToLayer(LayerMask.LayerToName(gameObject.layer) + " Projectile");
+		return true;
 	}
 
 	public void ApplyDamage(float damage) {

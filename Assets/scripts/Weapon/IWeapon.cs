@@ -14,11 +14,18 @@ public abstract class IWeapon : MonoBehaviour {
 
 	public Transform shootPosition;
 
-	public abstract bool Fire();
+	public abstract GameObject Fire();
 
 	public void Face(Transform target, float accuracy) {
 		Debug.Log (target);
 		Debug.Log (shootPosition);
+		if (target == null) {
+			return;
+		}
+		if (Vector3.Angle(transform.forward, target.position - transform.position) > 90f) {
+			shootPosition.rotation = transform.rotation;
+			return;
+		}
 		Quaternion newRotation = Quaternion.LookRotation (target.position-shootPosition.position);
 		shootPosition.transform.rotation = Quaternion.Lerp (transform.rotation, newRotation, accuracy);
 	}
