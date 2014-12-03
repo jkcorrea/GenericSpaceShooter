@@ -12,6 +12,7 @@ using UnityEngine;
 
 public class EnemyShip : IShip {
 
+
 	public override void Start() {
 		base.Start();
 		Debug.Log ("Subclass Start()");

@@ -85,7 +85,7 @@ public class LaserWeapon : IWeapon {
 		isShowingLaser = true;
 		lineRenderer.enabled = true;
 		generateLaser ();
-		audio.Play ();
+//		audio.Play ();
 		yield return new WaitForSeconds (.1f);
 		resetLaser();
 		isShowingLaser = false;

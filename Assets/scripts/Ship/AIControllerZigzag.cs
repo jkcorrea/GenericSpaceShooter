@@ -14,15 +14,18 @@ public class AIControllerZigzag : AIController {
 
 	public float amplitude = 3;
 
-	IShip ship;
-
-	void Start() {
-		ship = GetComponent<IShip>();
+	override
+	protected void Start() {
+		base.Start ();
 		ship.rigidbody.AddForce(Vector3.right*amplitude, ForceMode.VelocityChange);
 	}
 
-	void Update() {
+	override
+	protected void Update() {
+		base.Update ();
 		ship.Accelerate(getAcceleration());
+//		ship.weapon.Face (target, accuracy);
+		Fire ();
 	}
 
 	Vector3 getAcceleration() {

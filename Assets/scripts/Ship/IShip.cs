@@ -17,11 +17,27 @@ public abstract class IShip : MonoBehaviour {
 	Vector3 acceleration;
 	float health;
 	bool isDead;
+	float weapon1btnX;
+	float weapon1btnY;
+	float btnWidth;
+	float btnHeight;
+	float padding;
+	bool isDefaultWeapon;
+	string  buttonText;
+
 
 	List<DeathListener> deathListeners;
 
 	void Awake() {
 		deathListeners = new List<DeathListener>();
+		btnWidth = 100.0f;
+		btnHeight = 50.0f;
+		padding = 20.0f;
+		weapon1btnX = Screen.width - btnWidth - padding;
+		weapon1btnY = Screen.height - btnHeight - padding;
+		weapon = transform.Find("Weapon").GetComponent<BulletWeapon> () as BulletWeapon;
+		isDefaultWeapon = true;
+		buttonText = "Switch Weapon";
 	}
 
 	public virtual void Start() {
@@ -31,8 +47,6 @@ public abstract class IShip : MonoBehaviour {
 		acceleration = initialAcceleration;
 		health = initialHealth;
 		isDead = health > 0f;
-//		weapon = gameObject.AddComponent ("BulletWeapon") as BulletWeapon;
-		weapon = gameObject.AddComponent ("LaserWeapon") as LaserWeapon;
 	}
 
 	void FixedUpdate() {
@@ -97,7 +111,21 @@ public abstract class IShip : MonoBehaviour {
 	//	IList<Weapon> weapons;
 
 	//	Weapon currentWeapon;
-	
+
+	void OnGUI()
+	{
+		if (GUI.Button(new Rect(weapon1btnX, weapon1btnY, btnWidth, btnHeight), buttonText))
+		{
+			if(isDefaultWeapon){
+				weapon = transform.Find("Weapon").GetComponent<LaserWeapon> () as LaserWeapon;
+				isDefaultWeapon = false;
+			}
+			else{
+				weapon = transform.Find("Weapon").GetComponent<BulletWeapon> () as BulletWeapon;
+				isDefaultWeapon = true;
+			}	           
+		}
+	}
 
 
 }
