@@ -17,12 +17,12 @@ public abstract class IWeapon : MonoBehaviour {
 	public abstract GameObject Fire();
 
 	public void Face(Transform target, float accuracy) {
-		Debug.Log (target);
-		Debug.Log (shootPosition);
+//		Debug.Log (target);
+//		Debug.Log (shootPosition);
 		if (target == null) {
 			return;
 		}
-		if (Vector3.Angle(transform.forward, target.position - transform.position) > 90f) {
+		if (Vector3.Angle(transform.up, target.position - transform.position) > 90f) {
 			shootPosition.rotation = transform.rotation;
 			return;
 		}

@@ -27,9 +27,9 @@ public abstract class AIController : MonoBehaviour {
 		accuracy = 2 + 2*level;
 		SetModifiers(level);
 		ship = GetComponent<IShip>();
-		Debug.Log (ship);
+//		Debug.Log (ship);
 		target = GameObject.FindGameObjectWithTag("Player").transform;
-		Debug.Log(target);
+//		Debug.Log(target);
 	}
 
 	protected virtual void Update() {
