@@ -17,7 +17,6 @@ public abstract class IShip : MonoBehaviour {
 	Vector3 initialAcceleration;
 	Vector3 acceleration;
 	float health;
-	bool isDead;
 	float weapon1btnX;
 	float weapon1btnY;
 	float btnWidth;
@@ -47,7 +46,6 @@ public abstract class IShip : MonoBehaviour {
 		rigidbody.AddForce(initialVelocity, ForceMode.VelocityChange);
 		acceleration = initialAcceleration;
 		health = initialHealth;
-		isDead = health > 0f;
 	}
 
 	void FixedUpdate() {
@@ -83,10 +81,9 @@ public abstract class IShip : MonoBehaviour {
 	}
 
 	void Die() {
-		isDead = true;
 		Instantiate (explosionPrelab, transform.position, transform.rotation);
 		notifyDeathListeners();
-		Debug.Log ("Died...");
+//		Debug.Log ("Died...");
 		Destroy (gameObject);
 	}
 

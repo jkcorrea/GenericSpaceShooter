@@ -12,10 +12,10 @@ public class BasicProjectile: MonoBehaviour{
 
 	public float damage;
 
-    GameObject enemy;
+//    GameObject enemy;
 
 	void Start() {
-		enemy = GameObject.FindGameObjectWithTag("enemy");
+//		enemy = GameObject.FindGameObjectWithTag("enemy");
 		destroyProjectile();
 	}
 

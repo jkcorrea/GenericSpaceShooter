@@ -10,10 +10,10 @@ public class LaserWeapon : IWeapon {
     public float damage = 50;
     public crossHair laserCrossHair;
 
-	Camera mainCam;
+//	Camera mainCam;
 	LineRenderer lineRenderer;
 	int length;
-	Vector3[] position;
+//	Vector3[] position;
 	//Cache any transforms here
 	Transform myTransform;
 	Transform endEffectTransform;
@@ -22,12 +22,17 @@ public class LaserWeapon : IWeapon {
 	Vector3 offset;
 	Material LaserMaterialRef;
 	bool isShowingLaser;
+<<<<<<< HEAD
 	bool isPlayerOrNot;
+=======
+	crossHair laserCrossHair;
+//	bool isPlayerOrNot;
+>>>>>>> 1a00b4f2719944cbfd59c138f397c581ce6485c4
 	
 	
 	// Use this for initialization
 	void Start () {
-		isPlayerOrNot = false;
+//		isPlayerOrNot = false;
 		isShowingLaser = false;
 		lineRenderer = gameObject.AddComponent("LineRenderer") as LineRenderer;
 		lineRenderer.SetWidth(laserWidth, laserWidth);
@@ -37,9 +42,9 @@ public class LaserWeapon : IWeapon {
 		lineRenderer.material.mainTextureOffset = new Vector2 (0, Time.time);
 		lineRenderer.enabled = false;
 
-		mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+//		mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
 		if (gameObject.tag.Equals ("Player")) {
-			isPlayerOrNot = true;
+//			isPlayerOrNot = true;
 			laserCrossHair = gameObject.AddComponent<crossHair>();
 			laserCrossHair.shooting = false;
 		}
@@ -54,6 +59,7 @@ public class LaserWeapon : IWeapon {
 	public GameObject Fire() {
 		StopCoroutine ("showLaser");
 		StartCoroutine ("showLaser");
+		audio.Play ();
 		return null;
 	}
 
@@ -67,7 +73,7 @@ public class LaserWeapon : IWeapon {
 //		if(Physics.Raycast(transform.position, transform.forward, out hit, maxLength))
 			{
 				length = (int)Mathf.Round(hit[i].distance)+2;
-				position = new Vector3[length];
+//				position = new Vector3[length];
 				lineRenderer.SetVertexCount(length);
 				//notify enemy die
 				hit[i].collider.gameObject.SendMessage("ApplyDamage", damage, SendMessageOptions.DontRequireReceiver);
@@ -102,7 +108,7 @@ public class LaserWeapon : IWeapon {
 
 		int i = 0;
 		length = (int)maxLength;
-		position = new Vector3[length];
+//		position = new Vector3[length];
 		lineRenderer.SetVertexCount(length);
 		while (i < length) {
 			Vector3 pos = new Vector3(transform.position.x, transform.position.y , i * 0.5F);

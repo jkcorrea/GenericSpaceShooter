@@ -4,10 +4,10 @@ using UnityEngine;
 
 class Healthbar : MonoBehaviour
 {
-    public IShip playerShip;
-    public GUIStyle fgStyle;
-    public GUIStyle fgStyleLowHealth;
-    public GUIStyle bgStyle;
+    public IShip playerShip = null;
+    public GUIStyle fgStyle = null;
+	public GUIStyle fgStyleLowHealth = null;
+	public GUIStyle bgStyle = null;
     public int barToScreenRatio = 6;
 
     float healthBarLengthOriginal;
@@ -26,7 +26,7 @@ class Healthbar : MonoBehaviour
 
         if (health < 0) 
             return;
-        else if (!lowHealth && health / playerShip.initialHealth < 0.35)
+        else if (!lowHealth && health / playerShip.initialHealth < 0.35f)
             lowHealth = true;
 
         healthBarLength = (Screen.width / barToScreenRatio) * (playerShip.getHealth() / playerShip.initialHealth);

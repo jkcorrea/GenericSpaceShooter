@@ -31,7 +31,7 @@ public class AIControllerCircle : AIController {
 	protected void Update() {
 		base.Update();
 		Vector3 direction = new Vector3(-(center.y - transform.position.y), center.x - transform.position.x, 0f).normalized;
-		Debug.Log (direction);
+//		Debug.Log (direction);
 		ship.rigidbody.velocity = direction*Velocity + Vector3.forward*ship.rigidbody.velocity.z;
 //		ship.Accelerate(getAcceleration());
 		ship.weapon.Face(target, accuracy);

@@ -16,8 +16,8 @@ public class AIControllerStraight : AIController {
 	override
 	protected void Update() {
 		base.Update ();
-		Debug.Log(ship);
-		Debug.Log(ship.weapon);
+//		Debug.Log(ship);
+//		Debug.Log(ship.weapon);
 		ship.weapon.Face (target, accuracy);
 		Fire ();
 	}
