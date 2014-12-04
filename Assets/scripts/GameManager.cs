@@ -1,14 +1,15 @@
 ﻿using System;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviour, DeathListener
 {
     public IShip playerShip;
     public EnemySpawner enemySpawner;
     public GameObject GUIObject;
     
-    bool panCamera;
-    bool isPaused;
+    bool panCamera = false;
+    bool isPaused = false;
+    bool restartPrompt = false;
     Vector3 camPlayPosition;
     Healthbar healthGUI;
     Scoreboard scoreGUI;
@@ -16,16 +17,15 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        isPaused = true;
-        panCamera = false;
         camPlayPosition = Camera.main.transform.position;
         healthGUI = GUIObject.GetComponent<Healthbar>();
         scoreGUI = GUIObject.GetComponent<Scoreboard>();
 
-        enemySpawner.enabled = false;
-        healthGUI.enabled = false;
-        scoreGUI.enabled = false;
+        togglePaused();
+
         Camera.main.transform.position = new Vector3(0, 0, -50);
+
+        playerShip.RegisterDeathListener(this);
         
         // Enable the proper player controller script
 #if UNITY_ANDROID || UNITY_IPHONE
@@ -61,19 +61,39 @@ public class GameManager : MonoBehaviour
         if (isPaused)
         {
             float x = (Screen.width / 2) - 50;
-            float y = (Screen.height / 2) + 20;
-            if (GUI.Button(new Rect(x, y, 150, 80), "Play!", playButtonStyle))
+            float y = (Screen.height / 2) + 60;
+            if (restartPrompt && GUI.Button(new Rect(x, y, 150, 80), "Restart?", playButtonStyle)) 
+                restartGame();
+            else if (!restartPrompt && GUI.Button(new Rect(x, y, 150, 80), "Play!", playButtonStyle))
                 startGame();
         }
     }
 
     void startGame()
     {
-        isPaused = false;
+        togglePaused();
         panCamera = true;
         enemySpawner.enabled = true;
         healthGUI.enabled = true;
         scoreGUI.enabled = true;
+    }
 
+    void restartGame()
+    {
+        Application.LoadLevel(0);
+    }
+
+    void togglePaused()
+    {
+        isPaused = !isPaused;
+        enemySpawner.enabled = !isPaused;
+        healthGUI.enabled = !isPaused;
+        scoreGUI.enabled = !isPaused;
+    }
+
+    public void NotifyDeath(IShip deathShip)
+    {
+        restartPrompt = true;
+        togglePaused();
     }
 }
