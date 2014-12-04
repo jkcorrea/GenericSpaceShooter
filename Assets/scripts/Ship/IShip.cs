@@ -30,8 +30,8 @@ public abstract class IShip : MonoBehaviour {
 
 	void Awake() {
 		deathListeners = new List<DeathListener>();
-		btnWidth = 200.0f;
-		btnHeight = 100.0f;
+		btnWidth = 150.0f;
+		btnHeight = 75.0f;
 		padding = 20.0f;
 		weapon1btnX = Screen.width - btnWidth - padding;
 		weapon1btnY = Screen.height - btnHeight - padding;
