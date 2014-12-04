@@ -59,7 +59,7 @@ public class LaserWeapon : IWeapon {
 
 	void CheckCollsion(){
 		RaycastHit[] hit;
-		hit = Physics.RaycastAll(transform.position, transform.forward, maxLength);
+		hit = Physics.RaycastAll(transform.position, transform.up, maxLength);
 		int i = 0;
 		while(i < hit.Length){
 			//Check to make sure we aren't hitting triggers but colliders
