@@ -34,7 +34,7 @@ class Healthbar : MonoBehaviour
 
     void OnGUI()
     {
-        GUI.Box(new Rect(10, 10, healthBarLengthOriginal, 20), /*playerShip.getHealth() + "/" + playerShip.initialHealth*/ "", bgStyle);
-        GUI.Box(new Rect(10, 10, healthBarLength, 20), "", lowHealth ? fgStyleLowHealth : fgStyle);
+        GUI.Box(new Rect(10, 10, healthBarLengthOriginal, 50), /*playerShip.getHealth() + "/" + playerShip.initialHealth*/ "", bgStyle);
+        GUI.Box(new Rect(10, 10, healthBarLength, 50), "", lowHealth ? fgStyleLowHealth : fgStyle);
     }
 }
