@@ -54,6 +54,7 @@ public class LaserWeapon : IWeapon {
 	public GameObject Fire() {
 		StopCoroutine ("showLaser");
 		StartCoroutine ("showLaser");
+		audio.Play ();
 		return null;
 	}
 
