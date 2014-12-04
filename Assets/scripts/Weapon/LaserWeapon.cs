@@ -7,7 +7,8 @@ public class LaserWeapon : IWeapon {
 	public float noise = 1.0f;
 	public float maxLength = 50.0f;
 	public Color color = Color.red;
-	public float damage = 50;
+    public float damage = 50;
+    public crossHair laserCrossHair;
 
 	Camera mainCam;
 	LineRenderer lineRenderer;
@@ -21,7 +22,6 @@ public class LaserWeapon : IWeapon {
 	Vector3 offset;
 	Material LaserMaterialRef;
 	bool isShowingLaser;
-	crossHair laserCrossHair;
 	bool isPlayerOrNot;
 	
 	

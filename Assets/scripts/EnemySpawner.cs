@@ -37,6 +37,7 @@ public class EnemySpawner : MonoBehaviour, DeathListener
 		GameObject enemy = GameObject.Instantiate(boss, transform.position, transform.rotation) as GameObject;
 		IShip bossShip = enemy.GetComponent<IShip>();
 		registerDeathListeners(bossShip);
+        bossShip.RegisterDeathListener(GameObject.FindObjectOfType<GameManager>());
 	}
 
 	void spawnEnemy() {

@@ -10,6 +10,7 @@ public abstract class IShip : MonoBehaviour {
 	public Transform explosionPrelab;
 	public float score;
     public float accelScalar = 1f;
+    public bool enableSwitchWeapon;
 	
 	int currentWeaponIndex;
 	Vector3 initialVelocity;
@@ -119,7 +120,7 @@ public abstract class IShip : MonoBehaviour {
 
 	void OnGUI()
 	{
-		if (GUI.Button(new Rect(weapon1btnX, weapon1btnY, btnWidth, btnHeight), buttonText))
+		if (enableSwitchWeapon && GUI.Button(new Rect(weapon1btnX, weapon1btnY, btnWidth, btnHeight), buttonText))
 		{
 			if(isDefaultWeapon){
 				weapon = transform.Find("Weapon").GetComponent<LaserWeapon> () as LaserWeapon;
