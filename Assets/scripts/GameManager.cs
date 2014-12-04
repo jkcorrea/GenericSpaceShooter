@@ -89,8 +89,11 @@ public class GameManager : MonoBehaviour, DeathListener
         enemySpawner.enabled = !isPaused;
         healthGUI.enabled = !isPaused;
         scoreGUI.enabled = !isPaused;
-        playerShip.GetComponentInChildren<crossHair>().enabled = !isPaused;
         playerShip.enableSwitchWeapon = !isPaused;
+
+        crossHair ch = playerShip.GetComponentInChildren<crossHair>();
+        if (ch != null)
+            ch.enabled = !isPaused;
     }
 
     public void NotifyDeath(IShip deathShip)
