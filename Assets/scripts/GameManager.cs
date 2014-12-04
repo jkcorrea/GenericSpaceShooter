@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour, DeathListener
     public IShip playerShip;
     public EnemySpawner enemySpawner;
     public GameObject GUIObject;
+    public float waitBeforeSpawn;
     
     bool panCamera = false;
     bool isPaused = false;
@@ -40,6 +41,11 @@ public class GameManager : MonoBehaviour, DeathListener
     void Update()
     {
         if (panCamera) updateCameraPos();
+        if (!isPaused)
+        {
+            if (waitBeforeSpawn > 0) waitBeforeSpawn -= Time.deltaTime;
+            else if (!enemySpawner.enabled) enemySpawner.enabled = true;
+        }
     }
 
     void updateCameraPos()
@@ -60,7 +66,7 @@ public class GameManager : MonoBehaviour, DeathListener
 
         if (isPaused)
         {
-            float x = (Screen.width / 2) - 50;
+            float x = (Screen.width / 2) - 75;
             float y = (Screen.height / 2) + 60;
             if (restartPrompt && GUI.Button(new Rect(x, y, 150, 80), "Restart?", playButtonStyle)) 
                 restartGame();

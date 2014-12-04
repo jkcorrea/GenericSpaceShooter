@@ -18,7 +18,7 @@ public class Scoreboard : MonoBehaviour, DeathListener
 
     void OnGUI()
     {
-        GUI.Box(new Rect(Screen.width - (10 + scoreboardLength), 10, scoreboardLength, 20), score.ToString());
+        GUI.Box(new Rect(Screen.width - (10 + scoreboardLength), 10, scoreboardLength, 40), score.ToString(), style);
     }
 
     public void NotifyDeath(IShip deadShip)
