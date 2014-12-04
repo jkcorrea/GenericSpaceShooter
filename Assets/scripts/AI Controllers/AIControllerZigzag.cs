@@ -34,7 +34,7 @@ public class AIControllerZigzag : AIController {
 	}
 
 	override protected void SetModifiers(int level) {
-		frequency = 1 + 2*level;
+		frequency = 1 + 2*Math.Min (level, 5);
 	}
 
 }
