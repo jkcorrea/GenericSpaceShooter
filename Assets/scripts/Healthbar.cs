@@ -26,7 +26,7 @@ class Healthbar : MonoBehaviour
 
         if (health < 0) 
             return;
-        else if (!lowHealth && health / playerShip.initialHealth < 0.35)
+        else if (!lowHealth && health / playerShip.initialHealth < 0.35f)
             lowHealth = true;
 
         healthBarLength = (Screen.width / barToScreenRatio) * (playerShip.getHealth() / playerShip.initialHealth);

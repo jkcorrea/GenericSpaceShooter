@@ -15,7 +15,7 @@ public class EnemyShip : IShip {
 
 	public override void Start() {
 		base.Start();
-		Debug.Log ("Subclass Start()");
+//		Debug.Log ("Subclass Start()");
 		Destroy (gameObject,10f);
 	}
 

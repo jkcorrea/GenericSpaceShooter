@@ -82,7 +82,7 @@ public abstract class IShip : MonoBehaviour {
 	void Die() {
 		Instantiate (explosionPrelab, transform.position, transform.rotation);
 		notifyDeathListeners();
-		Debug.Log ("Died...");
+//		Debug.Log ("Died...");
 		Destroy (gameObject);
 	}
 

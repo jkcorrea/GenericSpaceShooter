@@ -23,7 +23,7 @@ public class Scoreboard : MonoBehaviour, DeathListener
 
     public void NotifyDeath(IShip deadShip)
     {
-        Debug.Log("test!! " + deadShip.score);
+//        Debug.Log("test!! " + deadShip.score);
         incrementScore(deadShip.score);
     }
 
