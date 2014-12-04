@@ -22,12 +22,7 @@ public class LaserWeapon : IWeapon {
 	Vector3 offset;
 	Material LaserMaterialRef;
 	bool isShowingLaser;
-<<<<<<< HEAD
 	bool isPlayerOrNot;
-=======
-	crossHair laserCrossHair;
-//	bool isPlayerOrNot;
->>>>>>> 1a00b4f2719944cbfd59c138f397c581ce6485c4
 	
 	
 	// Use this for initialization
