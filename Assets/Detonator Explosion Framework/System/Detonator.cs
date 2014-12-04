@@ -69,6 +69,8 @@ public class Detonator : MonoBehaviour {
 	public Material sparksMaterial;
 	public Material glowMaterial;
 	public Material heatwaveMaterial;
+
+	public Shader stubShader;
 		
     private Component[] components;
 
@@ -312,13 +314,13 @@ public class Detonator : MonoBehaviour {
 		defaultFireballBMaterial.mainTextureOffset = new Vector2(0.5f, 0f);
 		return defaultFireballBMaterial;
 	}
-	
+
 	public static Material DefaultSmokeAMaterial()
 	{
 		if (defaultSmokeAMaterial != null) return defaultSmokeAMaterial;
-        defaultSmokeAMaterial = new Material(Shader.Find("Particles/Alpha Blended"));
+		defaultSmokeAMaterial = new Material(Shader.Find("Particles/Alpha Blended"));
 		defaultSmokeAMaterial.name = "SmokeA-Default";
-        Texture2D tex = Resources.Load("Detonator/Textures/Smoke") as Texture2D;
+		Texture2D tex = Resources.Load("Detonator/Textures/Smoke") as Texture2D;
 		defaultSmokeAMaterial.SetColor("_TintColor", Color.white);
 		defaultSmokeAMaterial.mainTexture = tex;
 		defaultSmokeAMaterial.mainTextureScale = new Vector2(0.5f, 1f);
