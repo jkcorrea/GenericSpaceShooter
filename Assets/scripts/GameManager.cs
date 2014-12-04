@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour, DeathListener
 
         togglePaused();
 
-        Camera.main.transform.position = new Vector3(0, 0, -50);
+        Camera.main.transform.position = new Vector3(0, 0, -50f);
 
         playerShip.RegisterDeathListener(this);
         
