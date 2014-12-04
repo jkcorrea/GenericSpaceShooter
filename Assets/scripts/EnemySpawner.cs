@@ -11,8 +11,7 @@ public class EnemySpawner : MonoBehaviour, DeathListener
 
 	float timer;
 
-	// Use this for initialization
-	void Start () {
+	public void beginSpawning() {
 		timer = period;
 		spawnEnemy();
 	}
