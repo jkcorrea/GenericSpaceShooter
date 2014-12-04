@@ -32,7 +32,7 @@ public class LaserWeapon : IWeapon {
 		lineRenderer = gameObject.AddComponent("LineRenderer") as LineRenderer;
 		lineRenderer.SetWidth(laserWidth, laserWidth);
 		lineRenderer.SetVertexCount((int)maxLength);
-		LaserMaterialRef = (Material)Resources.LoadAssetAtPath("Assets/Materials/laser2.mat", typeof(Material));
+		LaserMaterialRef = (Material)Resources.LoadAssetAtPath("Assets/Materials/laser1.mat", typeof(Material));
 		lineRenderer.material = LaserMaterialRef;
 		lineRenderer.material.mainTextureOffset = new Vector2 (0, Time.time);
 		lineRenderer.enabled = false;
