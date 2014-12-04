@@ -36,8 +36,8 @@ public class BulletWeapon : IWeapon {
 		if (canFire) {
 			canFire = false;
 			cooldownRemaining = cooldown;
-			Debug.Log (projectile);
-			Debug.Log (shootPosition);
+//			Debug.Log (projectile);
+//			Debug.Log (shootPosition);
 			Transform bullet = GameObject.Instantiate(projectile, shootPosition.position, shootPosition.rotation) as Transform;
 			bullet.rigidbody.velocity = shootPosition.forward * speed;
 			return bullet.gameObject;

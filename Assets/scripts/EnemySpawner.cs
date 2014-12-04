@@ -8,12 +8,16 @@ public class EnemySpawner : MonoBehaviour, DeathListener
     public GameObject GUIObject;
 	public float period;
 	public float speed;
+	public GameObject boss;
+	public int ScoreForBoss;
 
 	float timer;
+	bool spawnedBoss;
 
 	public void beginSpawning() {
 		timer = period;
 		spawnEnemy();
+//		spawnBoss ();
 	}
 	
 	// Update is called once per frame
@@ -23,6 +27,16 @@ public class EnemySpawner : MonoBehaviour, DeathListener
 			spawnEnemy();
 			timer = period;
 		}
+		if (!spawnedBoss && GameObject.FindObjectOfType<Scoreboard>().GetScore () >= ScoreForBoss) {
+			spawnBoss();
+			spawnedBoss = true;
+		}
+	}
+
+	void spawnBoss() {
+		GameObject enemy = GameObject.Instantiate(boss, transform.position, transform.rotation) as GameObject;
+		IShip bossShip = enemy.GetComponent<IShip>();
+		registerDeathListeners(bossShip);
 	}
 
 	void spawnEnemy() {
