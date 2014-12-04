@@ -15,6 +15,9 @@ public class AIControllerBoss : AIController {
 	override protected void Update() {
 		Vector3 newVelocity = getNewVelocity();
 		ship.rigidbody.velocity = newVelocity;
+		if (target == null) {
+			return;
+		}
 		ship.weapon.Face (target, 50f);
 		ship.Fire();
 	}
@@ -24,6 +27,9 @@ public class AIControllerBoss : AIController {
 	}
 
 	Vector3 getNewVelocity() {
+		if (target == null) {
+			return Vector3.Lerp (rigidbody.velocity, Vector3.zero, Time.deltaTime);
+		}
 		Vector3 v = new Vector3(target.position.x - transform.position.x, target.position.y - transform.position.y, 0f);
 		return Vector3.Lerp (rigidbody.velocity, v, Time.deltaTime);
 	}

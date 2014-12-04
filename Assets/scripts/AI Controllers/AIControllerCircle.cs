@@ -48,8 +48,8 @@ public class AIControllerCircle : AIController {
 
 	override
 	protected void SetModifiers(int level) {
-		Velocity = 4f + 2*level;
-		accuracy = 10f + 5*level;
+		Velocity = 4f + 2*Math.Min (level, 5);
+		accuracy = 10f + 5*Math.Min (level, 5);
 	}
 
 }

@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour, DeathListener
     Healthbar healthGUI;
     Scoreboard scoreGUI;
     GUIStyle playButtonStyle;
+	bool title = true;
 
     void Start()
     {
@@ -25,7 +26,7 @@ public class GameManager : MonoBehaviour, DeathListener
         togglePaused();
         enemySpawner.enabled = false;
 
-        Camera.main.transform.position = new Vector3(0, 0, -50);
+        Camera.main.transform.position = new Vector3(0, 0, -50f);
 
         playerShip.RegisterDeathListener(this);
         
@@ -40,7 +41,8 @@ public class GameManager : MonoBehaviour, DeathListener
     }
 
     void Update()
-    {
+	{
+		scoreGUI.enabled = !title;
         if (panCamera) updateCameraPos();
         if (!isPaused)
         {
@@ -79,6 +81,7 @@ public class GameManager : MonoBehaviour, DeathListener
     void startGame()
     {
         togglePaused();
+		title = false;
         panCamera = true;
         healthGUI.enabled = true;
         scoreGUI.enabled = true;
@@ -93,7 +96,7 @@ public class GameManager : MonoBehaviour, DeathListener
     {
         isPaused = !isPaused;
         healthGUI.enabled = !isPaused;
-        scoreGUI.enabled = !isPaused;
+//        scoreGUI.enabled = !title;
         playerShip.enableSwitchWeapon = !isPaused;
 
         //crossHair ch = GameObject.FindGameObjectWithTag("playerWeapon").GetComponent<crossHair>();

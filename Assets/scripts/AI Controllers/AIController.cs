@@ -28,7 +28,11 @@ public abstract class AIController : MonoBehaviour {
 		SetModifiers(level);
 		ship = GetComponent<IShip>();
 //		Debug.Log (ship);
-		target = GameObject.FindGameObjectWithTag("Player").transform;
+		GameObject go = GameObject.FindGameObjectWithTag ("Player");
+		if (go == null) {
+			return;
+		}
+		target = go.transform;
 //		Debug.Log(target);
 	}
 
