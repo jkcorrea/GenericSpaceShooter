@@ -31,13 +31,13 @@ public class GameManager : MonoBehaviour, DeathListener
         playerShip.RegisterDeathListener(this);
         
         // Enable the proper player controller script
-//#if UNITY_ANDROID || UNITY_IPHONE
+#if UNITY_ANDROID || UNITY_IPHONE
         playerShip.GetComponent<TouchPlayerController>().enabled = true;
-        //playerShip.GetComponent<PCPlayerController>().enabled = false;
-//#else
+        playerShip.GetComponent<PCPlayerController>().enabled = false;
+#else
         playerShip.GetComponent<TouchPlayerController>().enabled = false;
-        //playerShip.GetComponent<PCPlayerController>().enabled = true;
-//#endif
+        playerShip.GetComponent<PCPlayerController>().enabled = true;
+#endif
     }
 
     void Update()
@@ -96,12 +96,13 @@ public class GameManager : MonoBehaviour, DeathListener
     {
         isPaused = !isPaused;
         healthGUI.enabled = !isPaused;
-//        scoreGUI.enabled = !title;
         playerShip.enableSwitchWeapon = !isPaused;
 
-        //crossHair ch = GameObject.FindGameObjectWithTag("playerWeapon").GetComponent<crossHair>();
-        //if (ch != null)
-        //    ch.enabled = !isPaused;
+        if (!restartPrompt)
+            scoreGUI.enabled = !title;
+        crossHair ch = GameObject.FindGameObjectWithTag("playerWeapon").GetComponent<crossHair>();
+        if (ch != null)
+            ch.enabled = !isPaused;
     }
 
     public void NotifyDeath(IShip deathShip)
