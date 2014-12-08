@@ -7,6 +7,9 @@ public class GameManager : MonoBehaviour, DeathListener
     public EnemySpawner enemySpawner;
     public GameObject GUIObject;
     public float waitBeforeSpawn;
+
+    public GameObject victoryText;
+    public GameObject defeatText;
     
     bool panCamera = false;
     bool isPaused = false;
@@ -108,6 +111,12 @@ public class GameManager : MonoBehaviour, DeathListener
     public void NotifyDeath(IShip deathShip)
     {
         restartPrompt = true;
+
+        if (deathShip != playerShip) 
+            victoryText.SetActive(true);
+        else 
+            defeatText.SetActive(true);
+
         togglePaused();
     }
 }
